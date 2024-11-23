@@ -13,4 +13,4 @@ let testies = async function(prompt)
 
 let theThing = document.getElementById("thing");
 theThing.innerText = "calculating";
-theThing.innerText = await testies("my favourite horse is");
+theThing.innerText = await testies("my favourite sandwich is");
