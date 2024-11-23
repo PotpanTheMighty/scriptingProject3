@@ -3,13 +3,30 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <base href="./">
     <title>Arguebots</title>
   </head>
   <body>
     <main>
         <h2 id="thing">Deez</h2>  
     </main>
-    <script type="module" src="script.js"></script>
+    <script type="module">
+        import { HfInference } from './node_modules/@huggingface/inference/dist/index.js'
+
+const hf = new HfInference('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')
+
+let testies = async function(prompt)
+{
+    let out = await hf.textGeneration({
+        model: 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
+        inputs: prompt
+      })
+    return(out.generated_text);
+}
+
+let theThing = document.getElementById("thing");
+theThing.innerText = "calculating";
+theThing.innerText = await testies("my favourite horse is");
+
+    </script>
   </body>
 </html>
