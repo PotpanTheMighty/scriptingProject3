@@ -1,4 +1,4 @@
-import { HfInference } from '@huggingface/inference'
+import { HfInference } from './node_modules/@huggingface/inference/dist/index.js'
 
 const hf = new HfInference('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')
 
