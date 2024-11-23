@@ -21,12 +21,12 @@ function setArgument()
 
 async function startArgument(argument)
 {
-  model1LastOut = await hf.textGeneration({
+  model1LastOut = await hf1.textGeneration({
     model: 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
     inputs: "I like " + argument + " because"
   }).generated_text;
 
-  model2LastOut = await hf.textGeneration({
+  model2LastOut = await hf2.textGeneration({
     model: 'TinyLlama/TinyLlama-1.1B-Chat-v1.0',
     inputs: "I don't like " + argument + " because"
   }).generated_text;
