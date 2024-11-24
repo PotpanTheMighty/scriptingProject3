@@ -10,7 +10,7 @@ const messageLength = 128;
 let topic = null;
 let model1LastOut;
 let model2LastOut;
-let modelTemperature = 0.2;
+let modelTemperature = 0.6;
 
 const model1Text = document.getElementById("model1");
 const model2Text = document.getElementById("model2");
@@ -35,21 +35,21 @@ async function startArgument(argument)
 
   model1LastOut = await hf1.chatCompletion({
     model: model1Name,
-    messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
-       { role: "user", content: "Tell me why you like " + argument}],
+    messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+       { role: "user", content: "Form a supporting argument about " + argument}],
     max_tokens: messageLength,
     temperature: modelTemperature
   });
-  model1LastOut = model1LastOut.choices[0].message.content;
+  model1LastOut = cleanString(model1LastOut.choices[0].message.content);
 
   model2LastOut = await hf2.chatCompletion({
     model: model2Name,
-    messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
-      { role: "user", content: "Tell me why you dislike " + argument}],
+    messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+      { role: "user", content: "Form a critical argument " + argument}],
     max_tokens: messageLength,
     temperature: modelTemperature
   });
-  model2LastOut = model2LastOut.choices[0].message.content;
+  model2LastOut = cleanString(model2LastOut.choices[0].message.content);
 
   model1Text.innerText += "\n" + model1LastOut + "\n";
   model2Text.innerText += "\n" + model2LastOut + "\n";
@@ -64,29 +64,40 @@ async function continueArgument(argument)
     //Model 1 argues
     model1LastOut = await hf1.chatCompletion({
       model: model1Name,
-      messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
-        { role: "user", content: "Tell me why you disagree with the ideas of this statement:" + model2LastOut}],
+      messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+        { role: "user", content: "Form a rebuttal against this argument: " + model2LastOut}],
       max_tokens: messageLength,
       temperature: modelTemperature
     });
-    model1LastOut = model1LastOut.choices[0].message.content;
+    model1LastOut = cleanString(model1LastOut.choices[0].message.content);
     model1Text.innerText += "\n" + model1LastOut;
 
     //Model 2 argues
     model2Text.innerText += "\n\n\n\nProcessing rebuttal...";
     model2LastOut = await hf2.chatCompletion({
       model: model2Name,
-      messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
-        { role: "user", content: "Tell me why you disagree with the ideas of this statement:" + model1LastOut}],
+      messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+        { role: "user", content: "Form a rebuttal against this argument: " + model1LastOut}],
       max_tokens: messageLength,
       temperature: modelTemperature
     });
-    model2LastOut = model2LastOut.choices[0].message.content;
+    model2LastOut = cleanString(model2LastOut.choices[0].message.content);
     model2Text.innerText += "\n" + model2LastOut;
 
     //Creates space to next model 1 message
     model1Text.innerText += "\n\n\n"
   };
+}
+
+function cleanString(inString)
+{
+  let stringPieces = inString.split("\n");
+  let outString = stringPieces[0];
+  for(let i = 1; i < stringPieces.length - 1; i++)
+  {
+    outString += stringPieces[i] + "\n";
+  }
+  return outString;
 }
 
 async function runArgument()
