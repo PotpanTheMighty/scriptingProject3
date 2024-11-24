@@ -2,28 +2,31 @@
     position: fixed;
     left: 0;
     top: 0;
-    height: 10%;
+    height: 15%;
     width: 100%;
     justify-content: center;
+    text-align: center;
     display: flex;
   }
 
 .title{
+    position: relative;
+    height: 50%;
     width: 20%;
     display: inline-flex;
   }
 
 .startButton{
     position: relative;
-    height: 50%;
-    bottom: -50%;
+    height: 40px;
+    top: 12px;
     display: inline-flex;
     text-align: center;
   }
 
 .textColumn{
-    position: fixed;
-    top: 100px;
+  position: relative;
+    top: 70px;
     width:40%;
     display: inline-flex;
   }

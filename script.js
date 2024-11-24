@@ -27,8 +27,8 @@ function setArgument()
 
 async function startArgument(argument)
 {
-  model1Text.innerText = "Processing...";
-  model2Text.innerText = "Processing...";
+  model1Text.innerText = "Model 1:\nProcessing...";
+  model2Text.innerText = "Model 2:\nProcessing...";
 
   model1LastOut = await hf1.chatCompletion({
     model: modelName,
