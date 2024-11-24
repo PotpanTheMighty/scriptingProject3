@@ -108,7 +108,7 @@ function cleanString(inString)
   //Splits the text into sentences, then reconstructs it without the final sentence fragment
   let stringPieces = inString.split(".");
   let outString = stringPieces[0];
-  for(let i = i; i < stringPieces.length - 1; i++)
+  for(let i = 1; i < stringPieces.length - 1; i++)
   {
     outString += stringPieces[i] + ".";
   }
