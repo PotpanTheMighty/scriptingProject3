@@ -110,16 +110,16 @@ function getSpaceDifference(myLast, opponentLast)
 function getSpace(textBlock)
 {
   let returnSpace = "";
-  for(let i = 0; i < textBlock.length; i++)
+  for(let i = 0; i < textBlock.length / approximateLineWdith; i++)
   {
     returnSpace += "\n";
   }
-  /*
+
   for(let i in textBlock.match("\n"))
   {
     returnSpace += "\n";
   }
-    */
+  
   return returnSpace;
 }
 
