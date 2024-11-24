@@ -3,7 +3,7 @@ import { HfInference } from './index.js'
 const hf1 = new HfInference('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')
 const hf2 = new HfInference('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')
 const model1Name = "meta-llama/Llama-3.2-1B-Instruct";
-const model2Name = "google/flan-t5-small";
+const model2Name = "microsoft/Phi-3.5-mini-instruct";
 const argumentLength = 3;
 const messageLength = 128;
 
