@@ -13,7 +13,7 @@ let model2LastOut;
 
 const model1Text = document.getElementById("thing1");
 const model2Text = document.getElementById("thing2");
-const startButton = document.getElementById("startButton");
+let startButton = document.getElementById("startArgumentButton");
 
 //Prompts the user for a new argument topic
 function setArgument()
@@ -92,6 +92,12 @@ async function runArgument()
   await continueArgument(topic);
 }
 
-startButton.addEventListener("click", runArgument);
+function buttonClicked()
+{
+  console.log("Button clicked");
+  runArgument();
+}
+
+startButton.addEventListener("click", buttonClicked);
 
 runArgument();

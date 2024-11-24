@@ -4,30 +4,31 @@
     top: 0;
     height: 10%;
     width: 100%;
+    justify-content: center;
     display: flex;
-    align-items: center;
-    justify-content: right;
   }
 
 .title{
+    width: 20%;
     display: inline-flex;
-    width: 60%;
   }
 
 .startButton{
+    position: relative;
+    height: 50%;
+    bottom: -50%;
     display: inline-flex;
     text-align: center;
-    width: 20%;
   }
 
 .textColumn{
-    display: inline-flex;
-    top: 10%;
+    position: fixed;
+    top: 100px;
     width:40%;
+    display: inline-flex;
   }
 
 .blankColumn{
     display: inline-flex;
-    top: 10%;
     width:6.66%;
   }
