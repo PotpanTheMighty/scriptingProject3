@@ -92,6 +92,6 @@ async function runArgument()
   await continueArgument(topic);
 }
 
-startButton.addEventListener(onclick, runArgument);
+startButton.addEventListener("click", runArgument);
 
 runArgument();

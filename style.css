@@ -22,10 +22,12 @@
 
 .textColumn{
     display: inline-flex;
+    top: 10%;
     width:40%;
   }
 
 .blankColumn{
     display: inline-flex;
+    top: 10%;
     width:6.66%;
   }
