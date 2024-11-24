@@ -96,10 +96,14 @@ function cleanString(inString)
   }
 
   stringPieces = stringPieces[stringPieces.length - 1].split(".");
-  for(let i = 1; i < stringPieces.length - 1; i++)
+  if(stringPieces.length > 1)
+  {
+    outString += stringPieces[0] + ".";
+    for(let i = 0; i < stringPieces.length - 1; i++)
     {
       outString += stringPieces[i] + ".";
     }
+  }
 
   return outString;
 }
