@@ -5,7 +5,7 @@ const hf2 = new HfInference('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')
 const model1Name = "meta-llama/Llama-3.2-1B-Instruct";
 const model2Name = "microsoft/Phi-3.5-mini-instruct";
 const argumentLength = 3;
-const messageLength = 256;
+const messageLength = 150;
 const approximateLineWdith = 70;
 
 let topic = null;
@@ -101,7 +101,7 @@ function cleanString(inString)
 
 function getSpace(myLast, opponentLast)
 {
-  let lengthDifference = opponentLast - myLast;
+  let lengthDifference = opponentLast.length - myLast.length;
   let returnSpace = "";
   for(let i = 0; i < lengthDifference/approximateLineWdith; i++)
   {
