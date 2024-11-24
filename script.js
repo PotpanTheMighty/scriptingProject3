@@ -52,8 +52,8 @@ async function startArgument(argument)
   });
   model2LastOut = cleanString(model2LastOut.choices[0].message.content);
 
-  model1Text.innerText += "\n" + model1LastOut + getSpace(model1LastOut, model2LastOut);
-  model2Text.innerText += "\n" + model2LastOut + getSpace(model2LastOut, model1LastOut);
+  model1Text.innerText += "\n" + model1LastOut + getSpaceDifference(model1LastOut, model2LastOut);
+  model2Text.innerText += "\n" + model2LastOut + getSpaceDifference(model2LastOut, model1LastOut);
 }
 
 async function continueArgument(argument)
@@ -80,8 +80,8 @@ async function continueArgument(argument)
     });
     model2LastOut = cleanString(model2LastOut.choices[0].message.content);
 
-    model1Text.innerText += "\n\n" + model1LastOut + getSpace(model1LastOut, model2LastOut) + getSpace(model2LastOut, model1LastOut);
-    model2Text.innerText += "\n\n" + getSpace(model2LastOut, model1LastOut) + model2LastOut + getSpace(model1LastOut, model2LastOut);
+    model1Text.innerText += "\n\n" + model1LastOut + getSpace(model2LastOut);
+    model2Text.innerText += "\n\n" + getSpace(model1LastOut) + model2LastOut;
   };
 }
 
@@ -96,7 +96,7 @@ function cleanString(inString)
   return outString;
 }
 
-function getSpace(myLast, opponentLast)
+function getSpaceDifference(myLast, opponentLast)
 {
   let lengthDifference = opponentLast.length - myLast.length;
   let returnSpace = "";
@@ -105,6 +105,20 @@ function getSpace(myLast, opponentLast)
     returnSpace += "\n";
   }
   return returnSpace;
+}
+
+function getSpace(textBlock)
+{
+  let returnSpace = "";
+  for(let i = 0; i < textBlock.length; i++)
+  {
+    returnSpace += "\n";
+  }
+  for(let i in textBlock.match("\n"))
+  {
+    returnSpace += "\n";
+  }
+  return returnSpace
 }
 
 async function runArgument()
