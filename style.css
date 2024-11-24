@@ -1,3 +1,25 @@
+.header{
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 10%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+  }
+
+.title{
+    display: inline-flex;
+    width: 60%;
+  }
+
+.startButton{
+    display: inline-flex;
+    text-align: center;
+    width: 20%;
+  }
+
 .textColumn{
     display: inline-flex;
     width:40%;
