@@ -5,15 +5,17 @@ const hf2 = new HfInference('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')
 const modelName = "meta-llama/Llama-3.2-1B-Instruct";
 const argumentLength = 3;
 const messageLength = 128;
-const modelTemperature = 0.1;
 
 let topic = null;
 let model1LastOut;
 let model2LastOut;
+let modelTemperature = 0.2;
 
 const model1Text = document.getElementById("model1");
 const model2Text = document.getElementById("model2");
-let startButton = document.getElementById("startArgumentButton");
+const startButton = document.getElementById("startArgumentButton");
+const tempSelector = document.getElementById("tempSelector");
+const tempDisplay = document.getElementById("tempOutput");
 
 //Prompts the user for a new argument topic
 function setArgument()
@@ -62,7 +64,7 @@ async function continueArgument(argument)
     model1LastOut = await hf1.chatCompletion({
       model: modelName,
       messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
-        { role: "user", content: "Tell me why you disagree with " + model2LastOut}],
+        { role: "user", content: "Tell me why you disagree with the ideas of this statement:" + model2LastOut}],
       max_tokens: messageLength,
       temperature: modelTemperature
     });
@@ -74,7 +76,7 @@ async function continueArgument(argument)
     model2LastOut = await hf2.chatCompletion({
       model: modelName,
       messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
-        { role: "user", content: "Tell me why you disagree with " + model1LastOut}],
+        { role: "user", content: "Tell me why you disagree with the ideas of this statement:" + model1LastOut}],
       max_tokens: messageLength,
       temperature: modelTemperature
     });
@@ -100,6 +102,13 @@ function buttonClicked()
   runArgument();
 }
 
+function sliderMoved()
+{
+  modelTemperature = tempSelector.value;
+  tempDisplay.innerText = "Temperature: " + modelTemperature;
+}
+
 startButton.addEventListener("click", buttonClicked);
+tempSelector.addEventListener("input", sliderMoved);
 
 runArgument();
