@@ -2,7 +2,8 @@ import { HfInference } from './index.js'
 
 const hf1 = new HfInference('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')
 const hf2 = new HfInference('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')
-const modelName = "meta-llama/Llama-3.2-1B-Instruct";
+const model1Name = "meta-llama/Llama-3.2-1B-Instruct";
+const model2Name = "google/flan-t5-small";
 const argumentLength = 3;
 const messageLength = 128;
 
@@ -33,7 +34,7 @@ async function startArgument(argument)
   model2Text.innerText = "Model 2:\nProcessing negative stance...";
 
   model1LastOut = await hf1.chatCompletion({
-    model: modelName,
+    model: model1Name,
     messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
        { role: "user", content: "Tell me why you like " + argument}],
     max_tokens: messageLength,
@@ -42,7 +43,7 @@ async function startArgument(argument)
   model1LastOut = model1LastOut.choices[0].message.content;
 
   model2LastOut = await hf2.chatCompletion({
-    model: modelName,
+    model: model2Name,
     messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
       { role: "user", content: "Tell me why you dislike " + argument}],
     max_tokens: messageLength,
@@ -62,7 +63,7 @@ async function continueArgument(argument)
 
     //Model 1 argues
     model1LastOut = await hf1.chatCompletion({
-      model: modelName,
+      model: model1Name,
       messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
         { role: "user", content: "Tell me why you disagree with the ideas of this statement:" + model2LastOut}],
       max_tokens: messageLength,
@@ -74,7 +75,7 @@ async function continueArgument(argument)
     //Model 2 argues
     model2Text.innerText += "\n\n\n\nProcessing rebuttal...";
     model2LastOut = await hf2.chatCompletion({
-      model: modelName,
+      model: model2Name,
       messages: [{role: "user", content: "Act as though you have strong opinions on " + argument},
         { role: "user", content: "Tell me why you disagree with the ideas of this statement:" + model1LastOut}],
       max_tokens: messageLength,
