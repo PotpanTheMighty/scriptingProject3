@@ -104,7 +104,7 @@ function buttonClicked()
 
 function sliderMoved()
 {
-  modelTemperature = tempSelector.value;
+  modelTemperature = tempSelector.value / 10;
   tempDisplay.innerText = "Temperature: " + modelTemperature;
 }
 
