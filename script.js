@@ -5,7 +5,8 @@ const hf2 = new HfInference('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')
 const model1Name = "meta-llama/Llama-3.2-1B-Instruct";
 const model2Name = "microsoft/Phi-3.5-mini-instruct";
 const argumentLength = 3;
-const messageLength = 128;
+const messageLength = 256;
+const approximateLineWdith = 70;
 
 let topic = null;
 let model1LastOut;
@@ -35,7 +36,7 @@ async function startArgument(argument)
 
   model1LastOut = await hf1.chatCompletion({
     model: model1Name,
-    messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+    messages: [{role: "user", content: "Act as though you need to win an argument about " + argument},
        { role: "user", content: "Form a supporting argument about " + argument}],
     max_tokens: messageLength,
     temperature: modelTemperature
@@ -44,15 +45,15 @@ async function startArgument(argument)
 
   model2LastOut = await hf2.chatCompletion({
     model: model2Name,
-    messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+    messages: [{role: "user", content: "Act as though you need to win an argument about " + argument},
       { role: "user", content: "Form a critical argument " + argument}],
     max_tokens: messageLength,
     temperature: modelTemperature
   });
   model2LastOut = cleanString(model2LastOut.choices[0].message.content);
 
-  model1Text.innerText += "\n" + model1LastOut + "\n";
-  model2Text.innerText += "\n" + model2LastOut + "\n";
+  model1Text.innerText += "\n" + model1LastOut + getSpace(model1LastOut, model2LastOut);
+  model2Text.innerText += "\n" + model2LastOut + getSpace(model2LastOut, model1LastOut);
 }
 
 async function continueArgument(argument)
@@ -64,40 +65,49 @@ async function continueArgument(argument)
     //Model 1 argues
     model1LastOut = await hf1.chatCompletion({
       model: model1Name,
-      messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+      messages: [{role: "user", content: "Act as though you need to win an argument about " + argument},
         { role: "user", content: "Form a rebuttal against this argument: " + model2LastOut}],
       max_tokens: messageLength,
       temperature: modelTemperature
     });
     model1LastOut = cleanString(model1LastOut.choices[0].message.content);
-    model1Text.innerText += "\n" + model1LastOut;
 
     //Model 2 argues
     model2Text.innerText += "\n\n\n\nProcessing rebuttal...";
     model2LastOut = await hf2.chatCompletion({
       model: model2Name,
-      messages: [{role: "user", content: "Act as though you need to win a debate about " + argument},
+      messages: [{role: "user", content: "Act as though you need to win an argument about " + argument},
         { role: "user", content: "Form a rebuttal against this argument: " + model1LastOut}],
       max_tokens: messageLength,
       temperature: modelTemperature
     });
     model2LastOut = cleanString(model2LastOut.choices[0].message.content);
-    model2Text.innerText += "\n" + model2LastOut;
 
-    //Creates space to next model 1 message
-    model1Text.innerText += "\n\n\n"
+    model1Text.innerText += "\n" + model1LastOut + getSpace(model1LastOut, model2LastOut);
+    model2Text.innerText += "\n" + getSpace(model2LastOut, model1LastOut), model2LastOut;
   };
 }
 
 function cleanString(inString)
 {
-  let stringPieces = inString.split("\n");
+  let stringPieces = inString.split("\n\n");
   let outString = stringPieces[0];
   for(let i = 1; i < stringPieces.length - 1; i++)
   {
-    outString += stringPieces[i] + "\n";
+    outString += stringPieces[i] + "\n\n";
   }
   return outString;
+}
+
+function getSpace(myLast, opponentLast)
+{
+  let lengthDifference = opponentLast - myLast;
+  let returnSpace = "";
+  for(let i = 0; i < lengthDifference/approximateLineWdith; i++)
+  {
+    returnSpace += "\n";
+  }
+  return returnSpace;
 }
 
 async function runArgument()
