@@ -90,11 +90,11 @@ async function continueArgument(argument)
 
 function cleanString(inString)
 {
-  let stringPieces = inString.split("\n\n");
+  let stringPieces = inString.split("\n");
   let outString = stringPieces[0];
   for(let i = 1; i < stringPieces.length - 1; i++)
   {
-    outString += stringPieces[i] + "\n\n";
+    outString += stringPieces[i] + "\n";
   }
   return outString;
 }
