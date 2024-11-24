@@ -5,7 +5,7 @@ const hf2 = new HfInference('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')
 const model1Name = "meta-llama/Llama-3.2-1B-Instruct";
 const model2Name = "microsoft/Phi-3.5-mini-instruct";
 const argumentLength = 3;
-const messageLength = 150;
+const messageLength = 256;
 const approximateLineWdith = 90;
 
 let topic = null;
@@ -114,12 +114,12 @@ function getSpace(textBlock)
   {
     returnSpace += "\n";
   }
-
+/*
   for(let i in textBlock.match("\n"))
   {
     returnSpace += "\n";
   }
-  
+  */
   return returnSpace;
 }
 
