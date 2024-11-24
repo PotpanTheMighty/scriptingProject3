@@ -89,16 +89,18 @@ function cleanString(inString)
 {
   let stringPieces = inString.split("\n");
   let outString = stringPieces[0];
-  /*
+
   for(let i = 1; i < stringPieces.length - 1; i++)
   {
     outString += stringPieces[i] + "\n";
   }
-    */
-  for(let i = 1; i < stringPieces.length; i++)
+
+  stringPieces = stringPieces[stringPieces.length - 1].split(".");
+  for(let i = 1; i < stringPieces.length - 1; i++)
     {
-      outString += stringPieces[i] + "\n";
+      outString += stringPieces[i] + ".";
     }
+
   return outString;
 }
 
