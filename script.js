@@ -73,7 +73,7 @@ async function continueArgument(argument)
     model1LastOut = cleanString(model1LastOut.choices[0].message.content);
 
     //Model 2 argues
-    model2Text.innerText += "\n\n\n\nProcessing rebuttal...";
+    model2Text.innerText += "Processing rebuttal...";
     model2LastOut = await hf2.chatCompletion({
       model: model2Name,
       messages: [{role: "user", content: "Act as though you need to win an argument about " + argument},
@@ -84,7 +84,7 @@ async function continueArgument(argument)
     model2LastOut = cleanString(model2LastOut.choices[0].message.content);
 
     model1Text.innerText += "\n" + model1LastOut + getSpace(model1LastOut, model2LastOut);
-    model2Text.innerText += "\n" + getSpace(model2LastOut, model1LastOut), model2LastOut;
+    model2Text.innerText += "\n" + getSpace(model2LastOut, model1LastOut) + model2LastOut;
   };
 }
 
