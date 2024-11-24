@@ -114,11 +114,13 @@ function getSpace(textBlock)
   {
     returnSpace += "\n";
   }
+  /*
   for(let i in textBlock.match("\n"))
   {
     returnSpace += "\n";
   }
-  return returnSpace
+    */
+  return returnSpace;
 }
 
 async function runArgument()
