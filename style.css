@@ -40,6 +40,17 @@
   font-weight: bold;
 }
 
+.lengthInput{
+  position: relative;
+  top: 21px;
+}
+
+.lengthDisplay{
+  position: relative;
+  top: 6px;
+  font-weight: bold;
+}
+
 .textColumn{
   position: relative;
     top: 70px;

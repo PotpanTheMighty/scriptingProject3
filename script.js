@@ -7,7 +7,6 @@ const hf2 = new HfInference('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')
 //Constants to control behaviour of the program
 const model1Name = "meta-llama/Llama-3.2-1B-Instruct";
 const model2Name = "microsoft/Phi-3.5-mini-instruct";
-const argumentLength = 3;
 const messageLength = 200;
 const approximateLineWdith = 90;
 
@@ -16,6 +15,7 @@ let topic = null;
 let model1LastOut;
 let model2LastOut;
 let modelTemperature = 0.6;
+let argumentLength = 3;
 
 //DOM node references
 const model1Text = document.getElementById("model1");
@@ -23,6 +23,8 @@ const model2Text = document.getElementById("model2");
 const startButton = document.getElementById("startArgumentButton");
 const tempSelector = document.getElementById("tempSelector");
 const tempDisplay = document.getElementById("tempOutput");
+const lengthSelector = document.getElementById("lengthSelector");
+const lengthDisplay = document.getElementById("lengthOutput");
 
 //Prompts the user for a new argument topic
 function setArgument()
@@ -185,6 +187,15 @@ function sliderMoved()
   tempDisplay.innerText = "Temperature: " + modelTemperature;
 }
 
+//Event listener for the argument length selector
+function lengthChanged()
+{
+  //Sets teh argument length to the selected value and displays the current value
+  argumentLength = lengthSelector.value;
+  lengthDisplay.innerText = "Argument Length: " + argumentLength;
+}
+
 //Assigns the event listeners
 startButton.addEventListener("click", buttonClicked);
 tempSelector.addEventListener("input", sliderMoved);
+lengthSelector.addEventListener("input", lengthChanged);
