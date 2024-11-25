@@ -9,14 +9,14 @@
     display: flex;
     background-color: dodgerblue;
     z-index: 99;
-  }
+}
 
 .title{
     position: relative;
     height: 50%;
     width: 20%;
     display: inline-flex;
-  }
+}
 
 .startButton{
     position: relative;
@@ -24,7 +24,7 @@
     top: 12px;
     display: inline-flex;
     text-align: center;
-  }
+}
 
 .tempSliderOuter{
   width: 20%;
@@ -45,9 +45,28 @@
     top: 70px;
     width:40%;
     display: inline-flex;
-  }
+}
 
 .blankColumn{
     display: inline-flex;
     width:6.66%;
-  }
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  height: 30px;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  display: flex;
+  background-color: dodgerblue;
+  z-index: 98;
+}
+
+.footerText{
+  position: relative;
+  top: -35%;
+  font-weight: bold;
+}
