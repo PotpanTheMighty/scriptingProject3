@@ -141,6 +141,14 @@ function getSpaceDifference(myLast, opponentLast)
   {
     returnSpace += "\n";
   }
+
+  //Adds a newline character to the return value for each excess newline character in the opponent's text
+  let newlineDifference = opponentLast.match("\n").length - myLast.match("\n").length;
+  for(let i = 0; i < newlineDifference; i++)
+  {
+    returnSpace += "\n";
+  }
+
   return returnSpace;
 }
 
