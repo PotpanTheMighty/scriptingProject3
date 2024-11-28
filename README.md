@@ -7,7 +7,8 @@ The goal of my project was to cause an argument about an arbtirary topic between
 
 The "New Argument" button at the top begins a new argument about a topic which the user is prompted for,
 and the "Temperature" slider controls the temperature of the models when they generate the text. Generally,
-a higher temperature will result in a more random, chaotic output.
+a higher temperature will result in a more random, chaotic output. The "Argument Length" selector dictates
+how many rebuttals each of the models will make.
 
 Model 1 on the left is meta-llama/Llama-3.2-1B-Instruct, and Model 2 on the right is microsoft/Phi-3.5-mini-instruct.
 Both models are accessed using the Huggingface.js API, and were chosen for their compatibility with the chatCompletion()
