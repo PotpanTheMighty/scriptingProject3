@@ -32,7 +32,7 @@ function setArgument()
   topic = null;
   do
   {
-    topic = prompt("What should the AIs agrue about?", "Topic");
+    topic = prompt("What should the AIs argue about?", "Topic");
   } while(topic === null)
 }
 
